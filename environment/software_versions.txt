@@ -1,0 +1,56 @@
+Software versions used for the main analyses
+
+DAP-seq processing and motif analysis
+
+* BBTools / BBDuk: v38.90
+* Bowtie2: v2.4.2
+* MACS3: v3.0.0a6
+* MEME Suite: v5.3.0
+* deepTools: used for BAM-level correlation and coverage summaries
+* bedtools: used for BED interval operations and peak merging
+* samtools: used for BAM file handling
+
+snMultiome processing
+
+* Cell Ranger ARC: v2.0.2
+* Seurat: used for RNA processing, WNN integration, clustering and visualization
+* Signac: used for ATAC processing, gene activity calculation and peak-to-gene linking
+
+R/Bioconductor packages used across analyses
+
+* ChIPseeker
+* GenomicFeatures
+* txdbmaker
+* GenomicRanges
+* GenomeInfoDb
+* Seurat
+* Signac
+* ggplot2
+* dplyr
+* tidyr
+* readr
+* stringr
+* purrr
+* ape
+* msa
+* ggtree
+* ggtreeExtra
+* circlize
+
+Evolutionary and comparative analyses
+
+* HMMER: used for AP2/ERF DNA-binding domain identification
+* ClustalW: used for DNA-binding domain sequence alignment
+* OrthoFinder: used for ortholog identification
+* Ka/Ks values were summarized from precomputed AP2/ERF DNA-binding domain ortholog-pair results
+
+Structural modeling
+
+* AlphaFold3: used through the AlphaFold3 server for ERF–DNA protein–DNA structural modeling
+* Biopython: used for parsing mmCIF model files in the repository scripts
+
+Notes
+
+* Exact package versions may vary depending on the local R or conda environment used to rerun the scripts.
+* Raw sequencing files and large intermediate files are not stored in this repository.
+* Users should install package versions compatible with the software versions listed above and the scripts in each workflow folder.
