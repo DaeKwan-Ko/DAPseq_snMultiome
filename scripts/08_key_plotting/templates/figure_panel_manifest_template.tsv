@@ -1,0 +1,7 @@
+figure	panel	input_table	output_plot	notes
+Fig2	clade_target_counts	results/02_dapseq_annotation/erf_target_clade_counts.tsv	results/08_key_plotting/plots/fig2_erf_clade_target_counts.pdf	Counts of ECA-biased and ECB-biased recurrent targets
+Fig3	kaks_boxplot	results/04_evolutionary_analysis/kaks_ortholog_pairs_annotated.tsv	results/08_key_plotting/plots/fig3_kaks_pooled_boxplot.pdf	Pooled AP2/ERF DBD Ka/Ks comparison
+Fig3	beta2_lineage	results/04_evolutionary_analysis/cross_lineage_beta2_summary_for_plotting.tsv	results/08_key_plotting/plots/fig3_cross_lineage_beta2_stacked_bar.pdf	Cross-lineage AA/WV/neither counts
+Fig4	celltype_counts	results/06_snmultiome_processing/celltype_condition_nucleus_counts.tsv	results/08_key_plotting/plots/fig4_celltype_condition_nucleus_counts.pdf	Nuclei counts by cell type and condition
+Fig4	erf_rna_log2fc	results/06_snmultiome_processing/erf_rna_activity_log2fc_by_celltype.tsv	results/08_key_plotting/plots/fig4_erf_rna_log2fc_by_celltype.pdf	ERF RNA response by cell type
+Fig4	network_driver_ranking	results/07_peak_to_gene_networks/cortex_1_erf_driver_ranking.tsv	results/08_key_plotting/plots/fig4_erf_driver_ranking_cortex1.pdf	Cortex_1 ERF driver ranking
