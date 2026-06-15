@@ -1,0 +1,6 @@
+celltype	geneID	marker_source
+Cortex_1	Sobic.example_marker_1	manual_marker_module
+Endodermis	Sobic.example_marker_2	manual_marker_module
+Pericycle	Sobic.example_marker_3	manual_marker_module
+Trichoblast	Sobic.example_marker_4	manual_marker_module
+Xylem	Sobic.example_marker_5	manual_marker_module
