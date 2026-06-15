@@ -1,0 +1,3 @@
+design_id	protein_variant	protein_geneID	clade	protein_sequence	dna_probe_id	dna_sequence	dna_motif_class	notes
+ECA_WT_ECA_motif_seedset	WT	Sobic.example_ECA	ECA	PASTE_PROTEIN_SEQUENCE_HERE	ECA_consensus	GCCGCC	ECA_consensus	Example only; replace with submitted sequence and DNA probe.
+ECB_WT_ECB_motif_seedset	WT	Sobic.example_ECB	ECB	PASTE_PROTEIN_SEQUENCE_HERE	ECB_consensus	ACCGAC	ECB_consensus	Example only; replace with submitted sequence and DNA probe.

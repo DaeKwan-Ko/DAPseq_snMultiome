@@ -1,0 +1,5 @@
+design_id	protein_chain	protein_residue_number	beta2_site
+ECA_WT_ECA_motif_seedset	A	1	beta2_site_1
+ECA_WT_ECA_motif_seedset	A	2	beta2_site_2
+ECB_WT_ECB_motif_seedset	A	1	beta2_site_1
+ECB_WT_ECB_motif_seedset	A	2	beta2_site_2
