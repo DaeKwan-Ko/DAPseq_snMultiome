@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#SBATCH --job-name=dapseq_meme
+#SBATCH --output=dapseq_meme.%j.out
+#SBATCH --error=dapseq_meme.%j.err
+#SBATCH --time=24:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=48G
+
+# Submit from the repository folder with:
+# sbatch scripts/01_dapseq_processing/08_run_meme_motif_discovery.sb
+
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/00_config.sh"
+
+# Load MEME Suite or activate conda environment as appropriate.
+# module purge
+# module load MEME
+# conda activate meme
+
+MEME_IN_DIR="${OUT_DIR}/meme_inputs"
+MEME_OUT_DIR="${OUT_DIR}/meme_results"
+BACKGROUND="${OUT_DIR}/meme_background/sorghum_0order_background.txt"
+THREADS_MEME=${THREADS:-8}
+
+mkdir -p "${MEME_OUT_DIR}/full_peaks" "${MEME_OUT_DIR}/summit_pm30bp" "$(dirname "${BACKGROUND}")"
+
+if [[ ! -f "${BACKGROUND}" ]]; then
+    echo "Generating zero-order background from genome FASTA."
+    fasta-get-markov -dna "${GENOME_FASTA}" "${BACKGROUND}"
+fi
+
+run_meme_set() {
+    local input_dir="$1"
+    local output_dir="$2"
+
+    for fasta in "${input_dir}"/*.fa; do
+        gene="$(basename "${fasta}" .fa)"
+        out="${output_dir}/${gene}"
+        if [[ -d "${out}" ]]; then
+            echo "Skipping existing MEME output: ${out}"
+            continue
+        fi
+        meme "${fasta}" \
+            -oc "${out}" \
+            -dna \
+            -revcomp \
+            -mod anr \
+            -nmotifs 2 \
+            -minw 8 \
+            -maxw 32 \
+            -bfile "${BACKGROUND}" \
+            -p "${THREADS_MEME}"
+    done
+}
+
+run_meme_set "${MEME_IN_DIR}/full_peaks" "${MEME_OUT_DIR}/full_peaks"
+run_meme_set "${MEME_IN_DIR}/summit_pm30bp" "${MEME_OUT_DIR}/summit_pm30bp"
+
+echo "MEME results written to: ${MEME_OUT_DIR}"

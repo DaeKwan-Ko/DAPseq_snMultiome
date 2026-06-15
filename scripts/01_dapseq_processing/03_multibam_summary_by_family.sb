@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#SBATCH --job-name=dapseq_mbs_family
+#SBATCH --output=dapseq_mbs_family.%j.out
+#SBATCH --error=dapseq_mbs_family.%j.err
+#SBATCH --time=18:00:00
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=100G
+
+# Submit from the repository folder with:
+# sbatch scripts/01_dapseq_processing/03_multibam_summary_by_family.sb
+
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/00_config.sh"
+
+# Load modules or activate conda environment as appropriate for your system.
+# module purge
+# module load deepTools
+# conda activate deeptools
+
+for family in ${FAMILIES}; do
+    family_lc="$(echo "${family}" | tr '[:upper:]' '[:lower:]')"
+    outdir="${OUT_DIR}/deeptools/${family_lc}"
+    mkdir -p "${outdir}"
+
+    bam_file="${OUT_DIR}/filelists/${family_lc}_bams.space.txt"
+    label_file="${OUT_DIR}/filelists/${family_lc}_labels.space.txt"
+
+    if [[ ! -s "${bam_file}" ]]; then
+        echo "WARNING: no BAMs found for ${family}; skipping." >&2
+        continue
+    fi
+
+    BAMS=$(cat "${bam_file}")
+    LABELS=$(cat "${label_file}")
+
+    multiBamSummary bins \
+        --bamfiles ${BAMS} \
+        --labels ${LABELS} \
+        --binSize "${BIN_SIZE}" \
+        --numberOfProcessors "${THREADS}" \
+        --outFileName "${outdir}/${family_lc}_TFs_bin${BIN_SIZE}.npz" \
+        --outRawCounts "${outdir}/${family_lc}_TFs_bin${BIN_SIZE}.raw_counts.tsv"
+
+    plotCorrelation \
+        -in "${outdir}/${family_lc}_TFs_bin${BIN_SIZE}.npz" \
+        --corMethod pearson \
+        --skipZeros \
+        --plotTitle "DAP-seq Pearson correlation: ${family}" \
+        --whatToPlot heatmap \
+        --colorMap RdYlBu \
+        --plotNumbers \
+        --outFileCorMatrix "${outdir}/${family_lc}_TFs_pearson_correlation.tsv" \
+        --plotFile "${outdir}/${family_lc}_TFs_pearson_correlation.pdf"
+done
