@@ -1,0 +1,11 @@
+lineage_order	species	taxonomy	major_group	total_erfs_analyzed
+1	Chlamydomonas reinhardtii	Chlorophytae	green algae	6
+2	Coccomyxa subellipsoidea	Chlorophytae	green algae	2
+3	Dunaliella salina	Chlorophytae	green algae	3
+4	Volvox carteri	Chlorophytae	green algae	7
+5	Marchantia polymorpha	Marchantiophyta	liverworts	22
+6	Physcomitrella patens	Bryophyta	mosses	118
+7	Selaginella moellendorffii	Lycopodiophyta	lycophytes	44
+8	Amborella trichopoda	Basal Magnoliophyta	basal angiosperms	61
+9	Oryza sativa	Monocot	monocots	135
+10	Glycine max	Eudicot	eudicots	299
